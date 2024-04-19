@@ -31,25 +31,37 @@ public:
 	void find();
 };
 
+void showIniMean() {
+	cout << "\t\t================================================================" << endl;
+	cout << "\t\t*                      请选择进入的系统                        *" << endl;
+	cout << "\t\t*                                                              *" << endl;
+	cout << "\t\t*               管理员                   客户                  *" << endl;
+	cout << "\t\t*                                                              *" << endl;
+	cout << "\t\t*                0                        1                    *" << endl;
+	cout << "\t\t================================================================" << endl;
+};
+
+void showLogin() {
+	cout << "\t\t================================================================" << endl;
+	cout << "\t\t*                      请登陆您的账户                           *" << endl;
+	cout << "\t\t*                                                              *" << endl;
+	cout << "\t\t*					    账号：                                  *" << endl;
+	cout << "\t\t*                                                              *" << endl;
+	cout << "\t\t================================================================" << endl;
+};
 
 int main()
 {
 	vector <Client> client;
 	int system_i = -1;
 	do {
-		cout << "\t\t================================================================" << endl;
-		cout << "\t\t*                      请选择进入的系统                        *" << endl;
-		cout << "\t\t*                                                              *" << endl;
-		cout << "\t\t*               管理员                   客户                  *" << endl;
-		cout << "\t\t*                                                              *" << endl;
-		cout << "\t\t*                0                        1                    *" << endl;
-		cout << "\t\t================================================================" << endl;
+		showIniMean();
 		cin >> system_i;
 		if (system_i == 0) {
 
 		}
 		if (system_i == 1) {
-
+			showLogin();
 		}
 		if (system_i != 0 && system_i != 1) cout << "非法输入，请再次输入" << endl;
 	} while (system_i != 0 && system_i != 1);
