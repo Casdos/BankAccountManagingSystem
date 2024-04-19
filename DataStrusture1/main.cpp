@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <random>
 using namespace std;
 
 class Client {
@@ -32,6 +33,20 @@ public:
 	void find();
 };
 
+void Client::check() {
+	cout << "您的身份标识号:\t" << ID << endl;
+	cout << "您的姓名:\t" << name << endl;
+	cout << "您的电话:\t" << phonenum << endl;
+	cout << "您的邮箱:\t" << email << endl;
+	cout << "您的身份证号:\t" << name << endl;
+	cout << "您的银行卡号:\t" << name << endl;
+	cout << "您的余额:\t" << name << endl;
+}
+
+void Client::modify() {
+
+}
+
 void showIniMean() {
 	cout << "\t\t================================================================" << endl;
 	cout << "\t\t*                      请选择进入的系统                        *" << endl;
@@ -44,10 +59,10 @@ void showIniMean() {
 
 void showLogin() {
 	cout << "\t\t================================================================" << endl;
-	cout << "\t\t*                      请登陆您的账户                           *" << endl;
+	cout << "\t\t*                      请登陆您的账户                          *" << endl;
 	cout << "\t\t*                                                              *" << endl;
-	cout << "\t\t*					    账号：                                  *" << endl;
-	cout << "\t\t*                   如无账号，请申请开户（按1）                   *" << endl;
+	cout << "\t\t*                       账号：                                 *" << endl;
+	cout << "\t\t*                   如无账号，请申请开户（按1）                *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
 
@@ -57,6 +72,12 @@ int main()
 	string ID, name, phonenum, email, idnum, cardnum;
 	int balance = 0;
 	int system_i = -1;
+	bool LoginFlag = true;
+	//生成随机数种子
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> dis(0, 9);
+
 	do {
 		showIniMean();
 		cin >> system_i;
@@ -64,24 +85,59 @@ int main()
 
 		}
 		if (system_i == 1) {
-			showLogin();
-			cin >> ID;
-			if (ID == "1") {
-				cout << "请设置您的身份证标识号：";
+			while (LoginFlag) {
+				showLogin();
 				cin >> ID;
-				cout << "请输入您的姓名：";
-				cin >> name;
-				cout << "请输入您的电话：";
-				cin >> phonenum;
-				cout << "请输入您的电子邮箱：";
-				cin >> email;
-				cout << "请输入您的身份证号：";
-				cin >> idnum;
-				user.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
-				cout << "已开户成功，点击退回登陆界面" << endl;
-				getchar();
+				if (ID == "1") {
+					cout << "请设置您的身份标识号：";
+					cin >> ID;
+					cout << "请输入您的姓名：";
+					cin >> name;
+					cout << "请输入您的电话：";
+					cin >> phonenum;
+					cout << "请输入您的电子邮箱：";
+					cin >> email;
+					cout << "请输入您的身份证号：";
+					cin >> idnum;
+					//随机生成16位银行卡号
+					for (int i = 0; i < 16; i++) cardnum += to_string(dis(gen));
+					user.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
+					cout << "已开户成功，点击退回登陆界面" << endl;
+					getchar();
+					continue;
+				}
+				else {
+					//查询是否存在输入账户
+					int position = 0;
+
+					LoginFlag = false;
+					int choice = 0;
+					//选择功能
+					cout << "\t\t================================================================" << endl;
+					cout << "\t\t*                          功能表                              *" << endl;
+					cout << "\t\t*        查询：2                               修改：3         *" << endl;
+					cout << "\t\t*        存款：4                               取款：5         *" << endl;
+					cout << "\t\t*        销户：6                                               *" << endl;
+					cout << "\t\t================================================================" << endl;
+					cin >> choice;
+					switch (choice) {
+					case 2:
+						user[position].check();
+						break;
+					case 3:
+						user[position].modify();
+					case 4:
+						user[position].saveMoney();
+					case 5:
+						user[position].getMoney();
+					case 6:
+						user[position].cancellation();
+					default:
+						cout << "非法输入，请再次输入" << endl;
+					}
+				}
+
 			}
-			showLogin();
 		}
 		if (system_i != 0 && system_i != 1) cout << "非法输入，请再次输入" << endl;
 	} while (system_i != 0 && system_i != 1);
