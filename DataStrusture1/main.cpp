@@ -137,6 +137,19 @@ int main()
 					}
 				}
 
+
+
+
+			}
+		}
+		if (system_i != 0 && system_i != 1) cout << "非法输入，请再次输入" << endl;
+	} while (system_i != 0 && system_i != 1);
+	return 0;
+}
+
+
+
+
 void Client::getMoney()
 {
 	cout<<"请输入取款金额:"<<endl;
@@ -149,12 +162,4 @@ void Client::getMoney()
 		cout<<"当前账户余额为："<<balance<<endl;
 	}
 	else cout<<"您的余额不足"<<endl;
-}
-
-
-			}
-		}
-		if (system_i != 0 && system_i != 1) cout << "非法输入，请再次输入" << endl;
-	} while (system_i != 0 && system_i != 1);
-	return 0;
 }
