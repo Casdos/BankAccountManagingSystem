@@ -38,9 +38,9 @@ void Client::check() {
 	cout << "您的姓名:\t" << name << endl;
 	cout << "您的电话:\t" << phonenum << endl;
 	cout << "您的邮箱:\t" << email << endl;
-	cout << "您的身份证号:\t" << name << endl;
-	cout << "您的银行卡号:\t" << name << endl;
-	cout << "您的余额:\t" << name << endl;
+	cout << "您的身份证号:\t" << idnum << endl;
+	cout << "您的银行卡号:\t" << cardnum << endl;
+	cout << "您的余额:\t" << balance << endl;
 }
 
 void Client::modify() {
@@ -154,7 +154,8 @@ void Client::getMoney()
 {
 	cout<<"请输入取款金额:"<<endl;
 	int m;
-	cin<<m;
+	// wuhanhan:原本为cin<<m,我修改了一下，cin>>m 如果知晓就可以删除
+	cin>>m;
 	if(balance>m)
 	{
 		balance=balance-m;
@@ -172,6 +173,7 @@ void Client::saveMoney(){
 	cout<<"当前账户余额为："<<balance<<endl;
 }
 
+//wuhanhan: 要删除这个对应的vector元素，可能需要传指针或者什么其他的
 void Client::cancellation(){
 	if(balance == 0){
 		cout<<"账户已成功注销"<<endl;
