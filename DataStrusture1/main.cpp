@@ -163,3 +163,24 @@ void Client::getMoney()
 	}
 	else cout<<"您的余额不足"<<endl;
 }
+
+void Client::saveMoney(){
+	int deposit;
+	cout<<"请输入存款金额:"<<endl;
+	cin>>deposit;
+	balance = balance + deposit;
+	cout<<"当前账户余额为："<<balance<<endl;
+}
+
+void Client::cancellation(){
+	if(balance == 0){
+		cout<<"账户已成功注销"<<endl;
+		ID = "0";
+        name = "none";
+        phonenum = "0";
+        email = "@bit.edu";
+        idnum = "0";
+        cardnum = "unknown";
+		bal = 0;
+	else cout<<"无法办理销户"<<endl;
+}
