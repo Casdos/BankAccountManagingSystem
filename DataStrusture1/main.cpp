@@ -54,6 +54,7 @@ int main()
 {
 	vector <Client> client;
 	int system_i = -1;
+	string ID;
 	do {
 		showIniMean();
 		cin >> system_i;
@@ -62,6 +63,7 @@ int main()
 		}
 		if (system_i == 1) {
 			showLogin();
+			cin >> ID;
 		}
 		if (system_i != 0 && system_i != 1) cout << "非法输入，请再次输入" << endl;
 	} while (system_i != 0 && system_i != 1);
