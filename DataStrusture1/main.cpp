@@ -20,12 +20,14 @@ public:
 		name(n), phonenum(phone), email(e), idnum(idn), cardnum(cardn), balance(bal) {};
 	void create();
 	void check();
-	void modify();
+	void modify(Client& temp);
 	void saveMoney();
 	void getMoney();
 	void cancellation();
+	string getID() { return ID; };
+	void setPhone() { string s; cin >> s; phonenum = s; };
+	void setEmail() { string s; cin >> s; email = s; };
 };
-
 class Host {
 private:
 public:
@@ -42,12 +44,38 @@ void Client::check() {
 	cout << "您的银行卡号:\t" << cardnum << endl;
 	cout << "您的余额:\t" << balance << endl;
 }
-
-void Client::modify() {
-
+void Client::modify(Client& temp) {
+	char choice = NULL;
+	while (choice != 'q') {
+		cout << "\t\t================================================================" << endl;
+		cout << "\t\t*                          修改                                 *" << endl;
+		cout << "\t\t*   修改电话请按1                         修改邮件请按2           *" << endl;
+		cout << "\t\t*   同时修改请按3                         退出修改请按q           *" << endl;
+		cout << "\t\t================================================================" << endl;
+		cin >> choice;
+		switch (choice) {
+		case '1':
+			cout << "请输入修改后电话：";
+			temp.setPhone();
+			break;
+		case '2':
+			cout << "请输入修改后邮件：";
+			temp.setEmail();
+			break;
+		case '3':
+			cout << "请输入修改后电话：";
+			temp.setPhone();
+			cout << "请输入修改后邮件：";
+			temp.setEmail();
+		case 'q':
+			cout << "退出修改模式";
+			return;
+		default:
+			cout << "非法输入，请再次输入" << endl;
+		}
+	}
 }
-
-void showIniMean() {
+void showHomeMean() {
 	cout << "\t\t================================================================" << endl;
 	cout << "\t\t*                      请选择进入的系统                        *" << endl;
 	cout << "\t\t*                                                              *" << endl;
@@ -56,14 +84,24 @@ void showIniMean() {
 	cout << "\t\t*                0                        1                    *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
-
 void showLogin() {
 	cout << "\t\t================================================================" << endl;
 	cout << "\t\t*                      请登陆您的账户                          *" << endl;
 	cout << "\t\t*                                                              *" << endl;
 	cout << "\t\t*                       账号：                                 *" << endl;
 	cout << "\t\t*                   如无账号，请申请开户（按1）                *" << endl;
+	cout << "\t\t*                       退出请按q                              *" << endl;
 	cout << "\t\t================================================================" << endl;
+};
+int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s) {
+	int i = 0;
+	for (; begin != end; begin++, i++) {
+		if (s == (*begin).getID()) return i;
+	}
+	if (begin == end) {
+		cout << "没有找到对应账号,请核验账号" << endl; 
+		return -1;
+	}
 };
 
 int main()
@@ -71,7 +109,7 @@ int main()
 	vector <Client> user;
 	string ID, name, phonenum, email, idnum, cardnum;
 	int balance = 0;
-	int system_i = -1;
+	char system_i = NULL;
 	bool LoginFlag = true;
 	//生成随机数种子
 	random_device rd;
@@ -79,14 +117,14 @@ int main()
 	uniform_int_distribution<> dis(0, 9);
 
 	do {
-		showIniMean();
+		showHomeMean();
 		cin >> system_i;
-		if (system_i == 0) {
+		if (system_i == '0') {
 
 		}
-		if (system_i == 1) {
+		if (system_i == '1') {
 			while (LoginFlag) {
-				showLogin();
+			care:showLogin();
 				cin >> ID;
 				if (ID == "1") {
 					cout << "请设置您的身份标识号：";
@@ -108,8 +146,8 @@ int main()
 				}
 				else {
 					//查询是否存在输入账户
-					int position = 0;
-
+					int position = match(user.begin(),user.end(),ID);
+					if (position == -1) goto care;
 					LoginFlag = false;
 					int choice = 0;
 					//选择功能
@@ -125,7 +163,7 @@ int main()
 						user[position].check();
 						break;
 					case 3:
-						user[position].modify();
+						user[position].modify(user[position]);
 					case 4:
 						user[position].saveMoney();
 					case 5:
@@ -142,8 +180,8 @@ int main()
 
 			}
 		}
-		if (system_i != 0 && system_i != 1) cout << "非法输入，请再次输入" << endl;
-	} while (system_i != 0 && system_i != 1);
+		if (system_i != '0' && system_i != '1') cout << "非法输入，请再次输入" << endl;
+	} while (system_i != 'q');
 	return 0;
 }
 
@@ -183,6 +221,7 @@ void Client::cancellation(){
         email = "@bit.edu";
         idnum = "0";
         cardnum = "unknown";
+		//wuhanhan:这行会报错，我先注释掉.此外，if后的{}没有匹配
 		bal = 0;
 	else cout<<"无法办理销户"<<endl;
 }
