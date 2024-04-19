@@ -5,6 +5,11 @@
 #include <random>
 using namespace std;
 
+//生成随机数种子,设置为 global 变量
+random_device rd;
+mt19937 gen(rd());
+uniform_int_distribution<> dis(0, 9);
+
 class Client {
 private:
 	string ID;
@@ -18,15 +23,14 @@ public:
 	Client(string IDn = "0", string n = "none", string phone = "0", string e = "@bit.edu", \
 		string idn = "0", string cardn = "unknown", int bal = 0) :ID(IDn), \
 		name(n), phonenum(phone), email(e), idnum(idn), cardnum(cardn), balance(bal) {};
-	void create();
 	void check();
-	void modify(Client& temp);
+	void modify();
 	void saveMoney();
 	void getMoney();
 	void cancellation();
 	string getID() { return ID; };
-	void setPhone() { string s; cin >> s; phonenum = s; };
-	void setEmail() { string s; cin >> s; email = s; };
+	void setPhone() { string s; cout << "请输入修改后电话："; cin >> s; phonenum = s; };
+	void setEmail() { string s; cout << "请输入修改后邮件："; cin >> s; email = s; };
 };
 class Host {
 private:
@@ -44,7 +48,7 @@ void Client::check() {
 	cout << "您的银行卡号:\t" << cardnum << endl;
 	cout << "您的余额:\t" << balance << endl;
 }
-void Client::modify(Client& temp) {
+void Client::modify() {
 	char choice = NULL;
 	while (choice != 'q') {
 		cout << "\t\t================================================================" << endl;
@@ -54,19 +58,15 @@ void Client::modify(Client& temp) {
 		cout << "\t\t================================================================" << endl;
 		cin >> choice;
 		switch (choice) {
-		case '1':
-			cout << "请输入修改后电话：";
-			temp.setPhone();
+		case '1':			
+			this->setPhone();
 			break;
-		case '2':
-			cout << "请输入修改后邮件：";
-			temp.setEmail();
+		case '2':			
+			this->setEmail();
 			break;
 		case '3':
-			cout << "请输入修改后电话：";
-			temp.setPhone();
-			cout << "请输入修改后邮件：";
-			temp.setEmail();
+			this->setPhone();
+			this->setEmail();
 		case 'q':
 			cout << "退出修改模式";
 			return;
@@ -93,6 +93,14 @@ void showLogin() {
 	cout << "\t\t*                       退出请按q                              *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
+void showClientFuncTable() {
+	cout << "\t\t================================================================" << endl;
+	cout << "\t\t*                          功能表                              *" << endl;
+	cout << "\t\t*        查询：2                               修改：3         *" << endl;
+	cout << "\t\t*        存款：4                               取款：5         *" << endl;
+	cout << "\t\t*        销户：6                                               *" << endl;
+	cout << "\t\t================================================================" << endl;
+};
 int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s) {
 	int i = 0;
 	for (; begin != end; begin++, i++) {
@@ -103,7 +111,21 @@ int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s)
 		return -1;
 	}
 };
-
+void create(string ID,string name,string phonenum,string email, string idnum, string cardnum,vector<Client>& vec) {
+	cout << "请设置您的身份标识号：";
+	cin >> ID;
+	cout << "请输入您的姓名：";
+	cin >> name;
+	cout << "请输入您的电话：";
+	cin >> phonenum;
+	cout << "请输入您的电子邮箱：";
+	cin >> email;
+	cout << "请输入您的身份证号：";
+	cin >> idnum;
+	//随机生成16位银行卡号
+	for (int i = 0; i < 16; i++) cardnum += to_string(dis(gen));
+	vec.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
+};
 int main()
 {
 	vector <Client> user;
@@ -111,10 +133,7 @@ int main()
 	int balance = 0;
 	char system_i = NULL;
 	bool LoginFlag = true;
-	//生成随机数种子
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> dis(0, 9);
+
 
 	do {
 		showHomeMean();
@@ -127,43 +146,25 @@ int main()
 			care:showLogin();
 				cin >> ID;
 				if (ID == "1") {
-					cout << "请设置您的身份标识号：";
-					cin >> ID;
-					cout << "请输入您的姓名：";
-					cin >> name;
-					cout << "请输入您的电话：";
-					cin >> phonenum;
-					cout << "请输入您的电子邮箱：";
-					cin >> email;
-					cout << "请输入您的身份证号：";
-					cin >> idnum;
-					//随机生成16位银行卡号
-					for (int i = 0; i < 16; i++) cardnum += to_string(dis(gen));
-					user.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
+					create(ID, name, phonenum, email, idnum, cardnum, user);					
 					cout << "已开户成功，点击退回登陆界面" << endl;
 					getchar();
 					continue;
 				}
 				else {
-					//查询是否存在输入账户
+					//查询是否存在输入账户，若不存在，则重新输入账号
 					int position = match(user.begin(),user.end(),ID);
 					if (position == -1) goto care;
 					LoginFlag = false;
 					int choice = 0;
-					//选择功能
-					cout << "\t\t================================================================" << endl;
-					cout << "\t\t*                          功能表                              *" << endl;
-					cout << "\t\t*        查询：2                               修改：3         *" << endl;
-					cout << "\t\t*        存款：4                               取款：5         *" << endl;
-					cout << "\t\t*        销户：6                                               *" << endl;
-					cout << "\t\t================================================================" << endl;
+					showClientFuncTable();
 					cin >> choice;
 					switch (choice) {
 					case 2:
 						user[position].check();
 						break;
 					case 3:
-						user[position].modify(user[position]);
+						user[position].modify();
 					case 4:
 						user[position].saveMoney();
 					case 5:
@@ -194,6 +195,7 @@ void Client::getMoney()
 	int m;
 	// wuhanhan:原本为cin<<m,我修改了一下，cin>>m 如果知晓就可以删除
 	cin>>m;
+	//wuhanhan:是不是改成 >=
 	if(balance>m)
 	{
 		balance=balance-m;
