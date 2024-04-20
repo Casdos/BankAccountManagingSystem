@@ -29,10 +29,11 @@ public:
 	void saveMoney();
 	void getMoney();
 	void cancellation();
+        void transfer();
 	string getID() { return ID; };
-	std::string getname();//chengguo:增添了下列若干个函数用于获得各项信息以存储，要不要干脆类改成public得了
-	std::string getphonenum();//wuhanhan:还是不要改为public,这样不安全。除非要修改值
-	std::string getemail();//wuhanhan std::是不是可以删掉，没必要添加
+	std::string getname();//增添了下列若干个函数用于获得各项信息以存储，要不要干脆类改成public得了
+	std::string getphonenum();
+	std::string getemail();
 	std::string getidnum();
 	std::string getcardnum();
 	int getbalance();
@@ -107,7 +108,7 @@ void showClientFuncTable() {
 	cout << "\t\t*                          功能表                              *" << endl;
 	cout << "\t\t*        查询：2                               修改：3         *" << endl;
 	cout << "\t\t*        存款：4                               取款：5         *" << endl;
-	cout << "\t\t*        销户：6                                               *" << endl;
+	cout << "\t\t*        销户：6                               转账：9         *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
 int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s) {
@@ -120,6 +121,16 @@ int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s)
 		return -1;
 	}
 };
+int matchcardnum(vector<Client>::iterator begin, vector<Client>::iterator end,string s) {
+	int i = 0;
+	for (; begin != end; begin++, i++) {
+		if (s == (*begin).getcardnum()) return i;
+	}
+	if (begin == end) {
+		cout << "没有找到对应账号,请核验账号" << endl; 
+		return -1;
+	}
+};//通过输入的银行卡号匹配账户
 void create(string ID,string name,string phonenum,string email, string idnum, string cardnum,vector<Client>& vec) {
 	cout << "请设置您的身份标识号：";
 	cin >> ID;
@@ -156,7 +167,7 @@ int main()
 				cin >> ID;
 				if (ID == "1") {
 					create(ID, name, phonenum, email, idnum, cardnum, user);					
-					cout << "已开户成功，点击任意键退回登陆界面" << endl;
+					cout << "已开户成功，点击退回登陆界面" << endl;
 					getchar();
 					continue;
 				}
@@ -183,6 +194,9 @@ int main()
 						break;
 					case 6:
 						user[position].cancellation();
+						break;
+					case 9:
+						user[position].transfer();
 						break;
 					default:
 						cout << "非法输入，请再次输入" << endl;
@@ -240,6 +254,25 @@ void Client::cancellation(){
 		//bal = 0;cg:未命名标识符，添加了}以通过运行
 	}
 	else cout<<"无法办理销户"<<endl;
+}
+void Client::transfer(){
+        int fund;
+        int i;
+        string cardnum1;
+        cout<<"请输入转入账户"<<endl;
+        cin>>cardnum1;
+        i = matchcardnum(user.begin(),user.end(),cardnum1);
+        cout<<"请输入转账金额"<<endl;
+        cin>>fund;
+        if(fund<=5000){
+        balance=balance-fund;}
+        if(fund>5000&fund<=10000){
+        balance=balance-fund-5;}
+        if(fund>10000&fund<=50000){
+        balance=balance-fund-7.5;}
+        if(fund>50000){
+        balance=balance-fund-fund*0.00015;}
+        user[i].balance=user[i].balance+fund;
 }
 std::string Client::getname()
 {
