@@ -43,10 +43,20 @@ public:
 class Host {
 private:
 public:
-	void browse();
+	void browse(vector<Client>data);
 	void find();
 };
-
+void Host::browse(vector<Client>data) {
+	int sumt = 0;
+	cout << "全体账户列表:" << endl;
+	for (int i = 0; i < data.size(); i++)
+	{
+		cout << data[i].getname() << " " << data[i].getbalance() << endl;
+		sumt += data[i].getbalance();
+	}
+	cout << "当前账户的数量：" << data.size() << endl;
+	cout << "当前的总存款数：" << sumt << endl;
+}
 void Client::check() {
 	cout << "您的身份标识号:\t" << ID << endl;
 	cout << "您的姓名:\t" << name << endl;
