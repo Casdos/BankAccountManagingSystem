@@ -89,6 +89,8 @@ void showHomeMean() {
 	cout << "\t\t*               管理员                   客户                  *" << endl;
 	cout << "\t\t*                                                              *" << endl;
 	cout << "\t\t*                0                        1                    *" << endl;
+	cout << "\t\t*                                                              *" << endl;
+	cout << "\t\t*                        退出系统请按q                          *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
 void showLogin() {
@@ -172,12 +174,16 @@ int main()
 						break;
 					case 3:
 						user[position].modify();
+						break;
 					case 4:
 						user[position].saveMoney();
+						break;
 					case 5:
 						user[position].getMoney();
+						break;
 					case 6:
 						user[position].cancellation();
+						break;
 					default:
 						cout << "非法输入，请再次输入" << endl;
 					}
@@ -188,7 +194,7 @@ int main()
 
 			}
 		}
-		if (system_i != '0' && system_i != '1') cout << "非法输入，请再次输入" << endl;
+		if (system_i != '0' && system_i != '1' && system_i!='q') cout << "非法输入，请再次输入" << endl;
 	} while (system_i != 'q');
 	return 0;
 }
