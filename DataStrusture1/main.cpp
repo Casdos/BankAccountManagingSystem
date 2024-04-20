@@ -30,9 +30,9 @@ public:
 	void getMoney();
 	void cancellation();
 	string getID() { return ID; };
-	std::string getname();//增添了下列若干个函数用于获得各项信息以存储，要不要干脆类改成public得了
-	std::string getphonenum();
-	std::string getemail();
+	std::string getname();//chengguo:增添了下列若干个函数用于获得各项信息以存储，要不要干脆类改成public得了
+	std::string getphonenum();//wuhanhan:还是不要改为public,这样不安全。除非要修改值
+	std::string getemail();//wuhanhan std::是不是可以删掉，没必要添加
 	std::string getidnum();
 	std::string getcardnum();
 	int getbalance();
@@ -156,7 +156,7 @@ int main()
 				cin >> ID;
 				if (ID == "1") {
 					create(ID, name, phonenum, email, idnum, cardnum, user);					
-					cout << "已开户成功，点击退回登陆界面" << endl;
+					cout << "已开户成功，点击任意键退回登陆界面" << endl;
 					getchar();
 					continue;
 				}
