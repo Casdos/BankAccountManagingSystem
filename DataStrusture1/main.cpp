@@ -3,9 +3,10 @@
 #include <string>
 #include <vector>
 #include <random>
+#include<fstream>
 using namespace std;
 
-//ç”Ÿæˆéšæœºæ•°ç§å­,è®¾ç½®ä¸º global å˜é‡
+//Éú³ÉËæ»úÊıÖÖ×Ó,ÉèÖÃÎª global ±äÁ¿
 random_device rd;
 mt19937 gen(rd());
 uniform_int_distribution<> dis(0, 9);
@@ -16,8 +17,8 @@ private:
 	string name;
 	string phonenum;
 	string email;
-	string idnum; // èº«ä»½è¯å·
-	string cardnum; // é“¶è¡Œå¡å·
+	string idnum; // Éí·İÖ¤ºÅ
+	string cardnum; // ÒøĞĞ¿¨ºÅ
 	int balance;
 public:
 	Client(string IDn = "0", string n = "none", string phone = "0", string e = "@bit.edu", \
@@ -29,8 +30,14 @@ public:
 	void getMoney();
 	void cancellation();
 	string getID() { return ID; };
-	void setPhone() { string s; cout << "è¯·è¾“å…¥ä¿®æ”¹åç”µè¯ï¼š"; cin >> s; phonenum = s; };
-	void setEmail() { string s; cout << "è¯·è¾“å…¥ä¿®æ”¹åé‚®ä»¶ï¼š"; cin >> s; email = s; };
+	std::string getname();//ÔöÌíÁËÏÂÁĞÈô¸É¸öº¯ÊıÓÃÓÚ»ñµÃ¸÷ÏîĞÅÏ¢ÒÔ´æ´¢£¬Òª²»Òª¸É´àÀà¸Ä³ÉpublicµÃÁË
+	std::string getphonenum();
+	std::string getemail();
+	std::string getidnum();
+	std::string getcardnum();
+	int getbalance();
+	void setPhone() { string s; cout << "ÇëÊäÈëĞŞ¸Äºóµç»°£º"; cin >> s; phonenum = s; };
+	void setEmail() { string s; cout << "ÇëÊäÈëĞŞ¸ÄºóÓÊ¼ş£º"; cin >> s; email = s; };
 };
 class Host {
 private:
@@ -40,21 +47,21 @@ public:
 };
 
 void Client::check() {
-	cout << "æ‚¨çš„èº«ä»½æ ‡è¯†å·:\t" << ID << endl;
-	cout << "æ‚¨çš„å§“å:\t" << name << endl;
-	cout << "æ‚¨çš„ç”µè¯:\t" << phonenum << endl;
-	cout << "æ‚¨çš„é‚®ç®±:\t" << email << endl;
-	cout << "æ‚¨çš„èº«ä»½è¯å·:\t" << idnum << endl;
-	cout << "æ‚¨çš„é“¶è¡Œå¡å·:\t" << cardnum << endl;
-	cout << "æ‚¨çš„ä½™é¢:\t" << balance << endl;
+	cout << "ÄúµÄÉí·İ±êÊ¶ºÅ:\t" << ID << endl;
+	cout << "ÄúµÄĞÕÃû:\t" << name << endl;
+	cout << "ÄúµÄµç»°:\t" << phonenum << endl;
+	cout << "ÄúµÄÓÊÏä:\t" << email << endl;
+	cout << "ÄúµÄÉí·İÖ¤ºÅ:\t" << idnum << endl;
+	cout << "ÄúµÄÒøĞĞ¿¨ºÅ:\t" << cardnum << endl;
+	cout << "ÄúµÄÓà¶î:\t" << balance << endl;
 }
 void Client::modify() {
 	char choice = NULL;
 	while (choice != 'q') {
 		cout << "\t\t================================================================" << endl;
-		cout << "\t\t*                          ä¿®æ”¹                                 *" << endl;
-		cout << "\t\t*   ä¿®æ”¹ç”µè¯è¯·æŒ‰1                         ä¿®æ”¹é‚®ä»¶è¯·æŒ‰2           *" << endl;
-		cout << "\t\t*   åŒæ—¶ä¿®æ”¹è¯·æŒ‰3                         é€€å‡ºä¿®æ”¹è¯·æŒ‰q           *" << endl;
+		cout << "\t\t*                          ĞŞ¸Ä                                 *" << endl;
+		cout << "\t\t*   ĞŞ¸Äµç»°Çë°´1                         ĞŞ¸ÄÓÊ¼şÇë°´2           *" << endl;
+		cout << "\t\t*   Í¬Ê±ĞŞ¸ÄÇë°´3                         ÍË³öĞŞ¸ÄÇë°´q           *" << endl;
 		cout << "\t\t================================================================" << endl;
 		cin >> choice;
 		switch (choice) {
@@ -68,37 +75,37 @@ void Client::modify() {
 			this->setPhone();
 			this->setEmail();
 		case 'q':
-			cout << "é€€å‡ºä¿®æ”¹æ¨¡å¼";
+			cout << "ÍË³öĞŞ¸ÄÄ£Ê½";
 			return;
 		default:
-			cout << "éæ³•è¾“å…¥ï¼Œè¯·å†æ¬¡è¾“å…¥" << endl;
+			cout << "·Ç·¨ÊäÈë£¬ÇëÔÙ´ÎÊäÈë" << endl;
 		}
 	}
 }
 void showHomeMean() {
 	cout << "\t\t================================================================" << endl;
-	cout << "\t\t*                      è¯·é€‰æ‹©è¿›å…¥çš„ç³»ç»Ÿ                        *" << endl;
+	cout << "\t\t*                      ÇëÑ¡Ôñ½øÈëµÄÏµÍ³                        *" << endl;
 	cout << "\t\t*                                                              *" << endl;
-	cout << "\t\t*               ç®¡ç†å‘˜                   å®¢æˆ·                  *" << endl;
+	cout << "\t\t*               ¹ÜÀíÔ±                   ¿Í»§                  *" << endl;
 	cout << "\t\t*                                                              *" << endl;
 	cout << "\t\t*                0                        1                    *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
 void showLogin() {
 	cout << "\t\t================================================================" << endl;
-	cout << "\t\t*                      è¯·ç™»é™†æ‚¨çš„è´¦æˆ·                          *" << endl;
+	cout << "\t\t*                      ÇëµÇÂ½ÄúµÄÕË»§                          *" << endl;
 	cout << "\t\t*                                                              *" << endl;
-	cout << "\t\t*                       è´¦å·ï¼š                                 *" << endl;
-	cout << "\t\t*                   å¦‚æ— è´¦å·ï¼Œè¯·ç”³è¯·å¼€æˆ·ï¼ˆæŒ‰1ï¼‰                *" << endl;
-	cout << "\t\t*                       é€€å‡ºè¯·æŒ‰q                              *" << endl;
+	cout << "\t\t*                       ÕËºÅ£º                                 *" << endl;
+	cout << "\t\t*                   ÈçÎŞÕËºÅ£¬ÇëÉêÇë¿ª»§£¨°´1£©                *" << endl;
+	cout << "\t\t*                       ÍË³öÇë°´q                              *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
 void showClientFuncTable() {
 	cout << "\t\t================================================================" << endl;
-	cout << "\t\t*                          åŠŸèƒ½è¡¨                              *" << endl;
-	cout << "\t\t*        æŸ¥è¯¢ï¼š2                               ä¿®æ”¹ï¼š3         *" << endl;
-	cout << "\t\t*        å­˜æ¬¾ï¼š4                               å–æ¬¾ï¼š5         *" << endl;
-	cout << "\t\t*        é”€æˆ·ï¼š6                                               *" << endl;
+	cout << "\t\t*                          ¹¦ÄÜ±í                              *" << endl;
+	cout << "\t\t*        ²éÑ¯£º2                               ĞŞ¸Ä£º3         *" << endl;
+	cout << "\t\t*        ´æ¿î£º4                               È¡¿î£º5         *" << endl;
+	cout << "\t\t*        Ïú»§£º6                                               *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
 int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s) {
@@ -107,22 +114,22 @@ int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s)
 		if (s == (*begin).getID()) return i;
 	}
 	if (begin == end) {
-		cout << "æ²¡æœ‰æ‰¾åˆ°å¯¹åº”è´¦å·,è¯·æ ¸éªŒè´¦å·" << endl; 
+		cout << "Ã»ÓĞÕÒµ½¶ÔÓ¦ÕËºÅ,ÇëºËÑéÕËºÅ" << endl; 
 		return -1;
 	}
 };
 void create(string ID,string name,string phonenum,string email, string idnum, string cardnum,vector<Client>& vec) {
-	cout << "è¯·è®¾ç½®æ‚¨çš„èº«ä»½æ ‡è¯†å·ï¼š";
+	cout << "ÇëÉèÖÃÄúµÄÉí·İ±êÊ¶ºÅ£º";
 	cin >> ID;
-	cout << "è¯·è¾“å…¥æ‚¨çš„å§“åï¼š";
+	cout << "ÇëÊäÈëÄúµÄĞÕÃû£º";
 	cin >> name;
-	cout << "è¯·è¾“å…¥æ‚¨çš„ç”µè¯ï¼š";
+	cout << "ÇëÊäÈëÄúµÄµç»°£º";
 	cin >> phonenum;
-	cout << "è¯·è¾“å…¥æ‚¨çš„ç”µå­é‚®ç®±ï¼š";
+	cout << "ÇëÊäÈëÄúµÄµç×ÓÓÊÏä£º";
 	cin >> email;
-	cout << "è¯·è¾“å…¥æ‚¨çš„èº«ä»½è¯å·ï¼š";
+	cout << "ÇëÊäÈëÄúµÄÉí·İÖ¤ºÅ£º";
 	cin >> idnum;
-	//éšæœºç”Ÿæˆ16ä½é“¶è¡Œå¡å·
+	//Ëæ»úÉú³É16Î»ÒøĞĞ¿¨ºÅ
 	for (int i = 0; i < 16; i++) cardnum += to_string(dis(gen));
 	vec.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
 };
@@ -147,12 +154,12 @@ int main()
 				cin >> ID;
 				if (ID == "1") {
 					create(ID, name, phonenum, email, idnum, cardnum, user);					
-					cout << "å·²å¼€æˆ·æˆåŠŸï¼Œç‚¹å‡»é€€å›ç™»é™†ç•Œé¢" << endl;
+					cout << "ÒÑ¿ª»§³É¹¦£¬µã»÷ÍË»ØµÇÂ½½çÃæ" << endl;
 					getchar();
 					continue;
 				}
 				else {
-					//æŸ¥è¯¢æ˜¯å¦å­˜åœ¨è¾“å…¥è´¦æˆ·ï¼Œè‹¥ä¸å­˜åœ¨ï¼Œåˆ™é‡æ–°è¾“å…¥è´¦å·
+					//²éÑ¯ÊÇ·ñ´æÔÚÊäÈëÕË»§£¬Èô²»´æÔÚ£¬ÔòÖØĞÂÊäÈëÕËºÅ
 					int position = match(user.begin(),user.end(),ID);
 					if (position == -1) goto care;
 					LoginFlag = false;
@@ -172,7 +179,7 @@ int main()
 					case 6:
 						user[position].cancellation();
 					default:
-						cout << "éæ³•è¾“å…¥ï¼Œè¯·å†æ¬¡è¾“å…¥" << endl;
+						cout << "·Ç·¨ÊäÈë£¬ÇëÔÙ´ÎÊäÈë" << endl;
 					}
 				}
 
@@ -181,7 +188,7 @@ int main()
 
 			}
 		}
-		if (system_i != '0' && system_i != '1') cout << "éæ³•è¾“å…¥ï¼Œè¯·å†æ¬¡è¾“å…¥" << endl;
+		if (system_i != '0' && system_i != '1') cout << "·Ç·¨ÊäÈë£¬ÇëÔÙ´ÎÊäÈë" << endl;
 	} while (system_i != 'q');
 	return 0;
 }
@@ -191,39 +198,119 @@ int main()
 
 void Client::getMoney()
 {
-	cout<<"è¯·è¾“å…¥å–æ¬¾é‡‘é¢:"<<endl;
+	cout<<"ÇëÊäÈëÈ¡¿î½ğ¶î:"<<endl;
 	int m;
-	// wuhanhan:åŸæœ¬ä¸ºcin<<m,æˆ‘ä¿®æ”¹äº†ä¸€ä¸‹ï¼Œcin>>m å¦‚æœçŸ¥æ™“å°±å¯ä»¥åˆ é™¤
+	// wuhanhan:Ô­±¾Îªcin<<m,ÎÒĞŞ¸ÄÁËÒ»ÏÂ£¬cin>>m Èç¹ûÖªÏş¾Í¿ÉÒÔÉ¾³ı
 	cin>>m;
-	//wuhanhan:æ˜¯ä¸æ˜¯æ”¹æˆ >=
+	//wuhanhan:ÊÇ²»ÊÇ¸Ä³É >=
 	if(balance>m)
 	{
 		balance=balance-m;
-		cout<<"å–æ¬¾æˆåŠŸï¼"<<endl;
-		cout<<"å½“å‰è´¦æˆ·ä½™é¢ä¸ºï¼š"<<balance<<endl;
+		cout<<"È¡¿î³É¹¦£¡"<<endl;
+		cout<<"µ±Ç°ÕË»§Óà¶îÎª£º"<<balance<<endl;
 	}
-	else cout<<"æ‚¨çš„ä½™é¢ä¸è¶³"<<endl;
+	else cout<<"ÄúµÄÓà¶î²»×ã"<<endl;
 }
 
 void Client::saveMoney(){
 	int deposit;
-	cout<<"è¯·è¾“å…¥å­˜æ¬¾é‡‘é¢:"<<endl;
+	cout<<"ÇëÊäÈë´æ¿î½ğ¶î:"<<endl;
 	cin>>deposit;
 	balance = balance + deposit;
-	cout<<"å½“å‰è´¦æˆ·ä½™é¢ä¸ºï¼š"<<balance<<endl;
+	cout<<"µ±Ç°ÕË»§Óà¶îÎª£º"<<balance<<endl;
 }
 
-//wuhanhan: è¦åˆ é™¤è¿™ä¸ªå¯¹åº”çš„vectorå…ƒç´ ï¼Œå¯èƒ½éœ€è¦ä¼ æŒ‡é’ˆæˆ–è€…ä»€ä¹ˆå…¶ä»–çš„
+//wuhanhan: ÒªÉ¾³ıÕâ¸ö¶ÔÓ¦µÄvectorÔªËØ£¬¿ÉÄÜĞèÒª´«Ö¸Õë»òÕßÊ²Ã´ÆäËûµÄ
 void Client::cancellation(){
 	if(balance == 0){
-		cout<<"è´¦æˆ·å·²æˆåŠŸæ³¨é”€"<<endl;
+		cout<<"ÕË»§ÒÑ³É¹¦×¢Ïú"<<endl;
 		ID = "0";
-        name = "none";
-        phonenum = "0";
-        email = "@bit.edu";
-        idnum = "0";
-        cardnum = "unknown";
-		//wuhanhan:è¿™è¡Œä¼šæŠ¥é”™ï¼Œæˆ‘å…ˆæ³¨é‡Šæ‰.æ­¤å¤–ï¼Œifåçš„{}æ²¡æœ‰åŒ¹é…
-		bal = 0;
-	else cout<<"æ— æ³•åŠç†é”€æˆ·"<<endl;
+		name = "none";
+		phonenum = "0";
+		email = "@bit.edu";
+		idnum = "0";
+		cardnum = "unknown";
+		//wuhanhan:ÕâĞĞ»á±¨´í£¬ÎÒÏÈ×¢ÊÍµô.´ËÍâ£¬ifºóµÄ{}Ã»ÓĞÆ¥Åä
+		//bal = 0;cg:Î´ÃüÃû±êÊ¶·û£¬Ìí¼ÓÁË}ÒÔÍ¨¹ıÔËĞĞ
+	}
+	else cout<<"ÎŞ·¨°ìÀíÏú»§"<<endl;
+}
+std::string Client::getname()
+{
+	return name;
+}
+std::string Client::getphonenum()
+{
+	return phonenum;
+}
+std::string Client::getemail()
+{
+	return email;
+}
+std::string Client::getidnum()
+{
+	return idnum;
+}
+std::string Client::getcardnum()
+{
+	return cardnum;
+}
+int Client::getbalance()
+{
+	return balance;
+}
+void saveToFile(const std::string& filename,vector<Client> data)
+{
+	std::ofstream outfile(filename, std::ios::out | std::ios::app);
+	if (outfile.is_open()) {
+		outfile.seekp(0, std::ios::beg);
+		for (auto& client : data) {
+			outfile << client.getID() << "," << client.getname() << "," << client.getphonenum() << "," << client.getemail() << "," << client.getidnum() << "," << client.getcardnum() << "," << client.getbalance() << std::endl;
+		}
+		outfile.close();
+	}
+	else {
+		std::cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş½øĞĞĞ´Èë¡£" << std::endl;
+	}
+}
+bool loadFromFile(const std::string& filename, vector<Client> data) {
+	data.clear(); // Çå¿ÕÏÖÓĞµÄ¿Í»§ĞÅÏ¢
+	std::ifstream infile(filename);
+	if (infile.is_open()) {
+		std::string line;
+		while (std::getline(infile, line)) {
+			size_t pos = line.find(",");
+			std::string ID = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			pos = line.find(",");
+			std::string name = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			pos = line.find(",");
+			std::string phonenum = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			pos = line.find(",");
+			std::string email = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			pos = line.find(",");
+			std::string idnum = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			pos = line.find(",");
+			std::string cardnum = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			int balance = std::stoi(line);
+			data.emplace_back(ID, name, phonenum, email, idnum, cardnum);
+		}
+		infile.close();
+		return 1;
+	}
+	else {
+		std::cerr << "ÎŞ·¨´ò¿ªÎÄ¼ş½øĞĞ¶ÁÈ¡¡£" << std::endl;
+		return 0;
+	}
 }
