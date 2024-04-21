@@ -167,6 +167,7 @@ int main()
 {
 	vector <Client> user;
 	string ID, name, phonenum, email, idnum, cardnum;
+	Host host; 
 	int balance = 0;
 	char system_i = NULL;
 	bool LoginFlag = true;
@@ -182,7 +183,7 @@ int main()
 			cin >> choice;
 			switch (choice) {
 			case 7:
-				Host::browse(user);
+				host.browse(user);
 				break;
 			case 8:
 		
