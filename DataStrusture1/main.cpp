@@ -121,6 +121,12 @@ void showClientFuncTable() {
 	cout << "\t\t*        销户：6                               转账：9         *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
+void showHostFuncTable() {
+	cout << "\t\t================================================================" << endl;
+	cout << "\t\t*                          功能表                              *" << endl;
+	cout << "\t\t*        浏览：7                               查找：8         *" << endl;
+	cout << "\t\t================================================================" << endl;
+};
 int match(vector<Client>::iterator begin, vector<Client>::iterator end, string s) {
 	int i = 0;
 	for (; begin != end; begin++, i++) {
@@ -170,7 +176,21 @@ int main()
 		showHomeMean();
 		cin >> system_i;
 		if (system_i == '0') {
-
+			int choice = 0;
+			showHostFuncTable();
+			while (1){			
+			cin >> choice;
+			switch (choice) {
+			case 7:
+				Host::browse(user);
+				break;
+			case 8:
+		
+				break;
+			default:
+				cout << "非法输入，请再次输入" << endl;
+				}
+			}
 		}
 		if (system_i == '1') {
 			while (LoginFlag) {
