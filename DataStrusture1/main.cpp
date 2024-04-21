@@ -4,6 +4,8 @@
 #include"Window.h"
 int main()
 {
+
+	Host host;
 	string ID, name, phonenum, email, idnum, cardnum;
 	int balance = 0;
 	char system_i = NULL;
@@ -49,7 +51,7 @@ int main()
 					case 5:
 						position->getMoney();
 					case 6:
-						position->cancellation();
+						user.cancellation();
 					default:
 						cout << "非法输入，请再次输入" << endl;
 					}

@@ -37,8 +37,9 @@ Client* User::match(const string s)
 	}
 }
 //wuhanhan: 要删除这个对应的vector元素，可能需要传指针或者什么其他的
-bool User::cancellation(const string s) 
+bool User::cancellation() 
 {
+	string s = "1";//有问题，等会改
 	for (auto it = data.begin(); it != data.end(); ) {
 		if (it->getID() == s) {
 			// 删除当前元素

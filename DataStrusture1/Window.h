@@ -4,13 +4,12 @@
 
 using namespace std;
 
-
 class Window
 {
 public:
 	void showHomeMean();
 	void showLogin();
-	void showClientFuncTable();
-	
+	void showClientFuncTable();	
+	void showHostFuncTable();
 };
 
