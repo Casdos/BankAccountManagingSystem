@@ -2,11 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-<<<<<<< Updated upstream
-      <FullPath>C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe</FullPath>
-=======
       <FullPath>C:\Users\0\Desktop\DataStrusture1\x64\Debug\DataStrusture1.exe</FullPath>
->>>>>>> Stashed changes
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

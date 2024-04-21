@@ -5,9 +5,6 @@ Administrator::Administrator(string address):address(address)
 }
 Administrator::~Administrator()
 {
-<<<<<<< Updated upstream
-	saveToFile("address");
-=======
 	saveToFile(address);
 }
 void Administrator::browse()
@@ -21,7 +18,6 @@ void Administrator::browse()
 	}
 	cout << "当前账户的数量：" << data.size() << endl;
 	cout << "当前的总存款数：" << sumt << endl;
->>>>>>> Stashed changes
 }
 void Administrator::saveToFile(const std::string& filename)
 {
@@ -77,9 +73,6 @@ bool Administrator::loadFromFile(const std::string& filename) {
 		std::cerr << "无法打开文件进行读取。" << std::endl;
 		return 0;
 	}
-<<<<<<< Updated upstream
-}
-=======
 }
 void Administrator::create(string ID, string name, string phonenum, string email, string idnum, string cardnum) {
 	cout << "请设置您的身份标识号：";
@@ -174,6 +167,3 @@ void Administrator::find(string s)
 			cout << "没有找到对应账号，请核验账号" << endl;
 		}
 }
-
-
->>>>>>> Stashed changes

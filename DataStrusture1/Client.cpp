@@ -97,8 +97,6 @@ void Client::saveMoney() {
 	cin >> deposit;
 	balance = balance + deposit;
 	cout << "当前账户余额为：" << balance << endl;
-<<<<<<< Updated upstream
-=======
 }
 void Client::transfer_accounts(Client* target)
 {
@@ -127,5 +125,4 @@ void Client::transfer_accounts(Client* target)
 		balance = balance - fund - fund * 0.00015;
 	}
 	target->balance += fund;
->>>>>>> Stashed changes
 }

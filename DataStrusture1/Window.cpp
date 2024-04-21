@@ -9,21 +9,14 @@ void Window::showLogin() {
 	cout << "\t\t*                       退出请按q                              *" << endl;
 	cout << "\t\t================================================================" << endl;
 }
-<<<<<<< Updated upstream
-void showClientFuncTable() {
-=======
 void Window::showClientFuncTable()
 {
->>>>>>> Stashed changes
 	cout << "\t\t================================================================" << endl;
 	cout << "\t\t*                          功能表                              *" << endl;
 	cout << "\t\t*        查询：2                               修改：3         *" << endl;
 	cout << "\t\t*        存款：4                               取款：5         *" << endl;
 	cout << "\t\t*        销户：6                               转账：9         *" << endl;
-<<<<<<< Updated upstream
-=======
 	cout << "\t\t*                       退出请按q                              *" << endl;
->>>>>>> Stashed changes
 	cout << "\t\t================================================================" << endl;
 };
 void Window::showHomeMean()
@@ -34,22 +27,14 @@ void Window::showHomeMean()
 	cout << "\t\t*               管理员                   客户                  *" << endl;
 	cout << "\t\t*                                                              *" << endl;
 	cout << "\t\t*                0                        1                    *" << endl;
-<<<<<<< Updated upstream
-=======
 	cout << "\t\t*                       退出请按q                              *" << endl;
->>>>>>> Stashed changes
 	cout << "\t\t================================================================" << endl;
 }
 void Window::showHostFuncTable() {
 	cout << "\t\t================================================================" << endl;
 	cout << "\t\t*                          功能表                              *" << endl;
 	cout << "\t\t*        浏览：7                               查找：8         *" << endl;
-<<<<<<< Updated upstream
-	cout << "\t\t*        导入：10                              导出：11         *" << endl;
-	cout << "\t\t================================================================" << endl;
-};
-=======
+	cout << "\t\t*        导入：10                              导出：11        *" << endl;
 	cout << "\t\t*                       退出请按q                              *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
->>>>>>> Stashed changes
