@@ -28,7 +28,7 @@ public:
 	void modify();
 	void saveMoney();
 	void getMoney();
-	void cancellation(vector<Client>&);
+	void cancellation(vector<Client> &user, int pos);
 	void transfer(double fund);
 	string getID() { return ID; };
 	std::string getname();//增添了下列若干个函数用于获得各项信息以存储，要不要干脆类改成public得了
@@ -160,7 +160,7 @@ void create(string ID, string name, string phonenum, string email, string idnum,
 	cin >> idnum;
 	//随机生成16位银行卡号
 	for (int i = 0; i < 16; i++) cardnum += to_string(dis(gen));
-	cout << cardnum;//告诉开户人银行卡号
+	cout << "已开户成功，您的银行卡号是："<<cardnum;//告诉开户人银行卡号
 	vec.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
 };
 int main()
@@ -171,7 +171,6 @@ int main()
 	int balance = 0;
 	char system_i = NULL;
 	bool LoginFlag = true;
-
 
 	do {
 		showHomeMean();
@@ -199,10 +198,11 @@ int main()
 				cin >> ID;
 				if (ID == "1") {
 					create(ID, name, phonenum, email, idnum, cardnum, user);
-					cout << "已开户成功，点击退回登陆界面" << endl;
+					cout << "点击任意键退回登陆界面" << endl;
 					getchar();
 					continue;
 				}
+				else if (ID == "q") break;
 				else {
 					//查询是否存在输入账户，若不存在，则重新输入账号
 					int position = match(user.begin(), user.end(), ID);
@@ -225,7 +225,7 @@ int main()
 						user[position].getMoney();
 						break;
 					case 6:
-						user[position].cancellation(user);
+						user[position].cancellation(user,position);
 						break;
 					case 9:
 					{
@@ -263,7 +263,6 @@ int main()
 
 
 
-
 			}
 		}
 		if (system_i != '0' && system_i != '1' && system_i != 'q') cout << "非法输入，请再次输入" << endl;
@@ -295,20 +294,10 @@ void Client::saveMoney() {
 	balance = balance + deposit;
 	cout << "当前账户余额为：" << balance << endl;
 }
-
-//wuhanhan: 要删除这个对应的vector元素，可能需要传指针或者什么其他的
-void Client::cancellation(vector<Client>& user) {
-	auto it = find(user.begin(), user.end(), *this);
-	if (it != user.end() && (*it).getbalance() == 0) {
-		user.erase(it);
+void Client::cancellation(vector<Client>& user,int pos) {
+	if (!user.empty() && user[pos].getbalance() == 0) {
+		user.erase(user.begin()+pos);
 		cout << "账户已成功注销" << endl;
-		ID = "0";
-		name = "none";
-		phonenum = "0";
-		email = "@bit.edu";
-		idnum = "0";
-		cardnum = "unknown";
-		balance = 0;
 	}
 	else {
 		cout << "无法办理销户" << endl;
