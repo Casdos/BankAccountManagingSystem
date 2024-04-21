@@ -21,6 +21,7 @@
     <ClCompile Include="Client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="Host.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -30,6 +31,11 @@
     <ClCompile Include="User.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+>>>>>>> Stashed changes
     <ClCompile Include="Administrator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -38,6 +44,7 @@
     <ClInclude Include="Client.h">
       <Filter>头文件</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Host.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -47,6 +54,11 @@
     <ClInclude Include="User.h">
       <Filter>头文件</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+>>>>>>> Stashed changes
     <ClInclude Include="Administrator.h">
       <Filter>头文件</Filter>
     </ClInclude>

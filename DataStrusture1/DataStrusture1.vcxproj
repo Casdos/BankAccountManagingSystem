@@ -129,16 +129,23 @@
   <ItemGroup>
     <ClCompile Include="Administrator.cpp" />
     <ClCompile Include="Client.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="Host.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="User.cpp" />
+=======
+    <ClCompile Include="main.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrator.h" />
     <ClInclude Include="Client.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="Host.h" />
     <ClInclude Include="User.h" />
+=======
+>>>>>>> Stashed changes
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

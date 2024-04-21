@@ -97,4 +97,35 @@ void Client::saveMoney() {
 	cin >> deposit;
 	balance = balance + deposit;
 	cout << "当前账户余额为：" << balance << endl;
+<<<<<<< Updated upstream
+=======
+}
+void Client::transfer_accounts(Client* target)
+{
+	double fund;
+	while (1)
+	{
+		cout << "请输入转账金额" << endl;
+		cin >> fund;
+		if (fund <= 0)
+			cout << "输入错误，请重新输入" << endl;
+		else
+			break;
+	}
+	if (fund <= 5000) {
+		balance -= fund;
+	}
+	else if (fund > 5000 && fund <= 10000) {
+		balance = balance - fund - 5;
+	}
+	else if (fund > 10000 && fund <= 50000) 
+	{
+		balance = balance - fund - 7.5;
+	}
+	else
+	{
+		balance = balance - fund - fund * 0.00015;
+	}
+	target->balance += fund;
+>>>>>>> Stashed changes
 }
