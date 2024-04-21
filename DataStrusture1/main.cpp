@@ -19,7 +19,7 @@ private:
 	string email;
 	string idnum; // 身份证号
 	string cardnum; // 银行卡号
-	int balance;
+	double balance;
 public:
 	Client(string IDn = "0", string n = "none", string phone = "0", string e = "@bit.edu", \
 		string idn = "0", string cardn = "unknown", int bal = 0) :ID(IDn), \
@@ -29,14 +29,14 @@ public:
 	void saveMoney();
 	void getMoney();
 	void cancellation();
-        void transfer();
+	void transfer(double fund);
 	string getID() { return ID; };
 	std::string getname();//增添了下列若干个函数用于获得各项信息以存储，要不要干脆类改成public得了
 	std::string getphonenum();
 	std::string getemail();
 	std::string getidnum();
 	std::string getcardnum();
-	int getbalance();
+	double getbalance();
 	void setPhone() { string s; cout << "请输入修改后电话："; cin >> s; phonenum = s; };
 	void setEmail() { string s; cout << "请输入修改后邮件："; cin >> s; email = s; };
 };
@@ -66,10 +66,10 @@ void Client::modify() {
 		cout << "\t\t================================================================" << endl;
 		cin >> choice;
 		switch (choice) {
-		case '1':			
+		case '1':
 			this->setPhone();
 			break;
-		case '2':			
+		case '2':
 			this->setEmail();
 			break;
 		case '3':
@@ -111,27 +111,27 @@ void showClientFuncTable() {
 	cout << "\t\t*        销户：6                               转账：9         *" << endl;
 	cout << "\t\t================================================================" << endl;
 };
-int match(vector<Client>::iterator begin, vector<Client>::iterator end,string s) {
+int match(vector<Client>::iterator begin, vector<Client>::iterator end, string s) {
 	int i = 0;
 	for (; begin != end; begin++, i++) {
 		if (s == (*begin).getID()) return i;
 	}
 	if (begin == end) {
-		cout << "没有找到对应账号,请核验账号" << endl; 
+		cout << "没有找到对应账号,请核验账号" << endl;
 		return -1;
 	}
 };
-int matchcardnum(vector<Client>::iterator begin, vector<Client>::iterator end,string s) {
+int matchcardnum(vector<Client>::iterator begin, vector<Client>::iterator end, string s) {
 	int i = 0;
 	for (; begin != end; begin++, i++) {
 		if (s == (*begin).getcardnum()) return i;
 	}
 	if (begin == end) {
-		cout << "没有找到对应账号,请核验账号" << endl; 
+		cout << "没有找到对应账号,请核验账号" << endl;
 		return -1;
 	}
 };//通过输入的银行卡号匹配账户
-void create(string ID,string name,string phonenum,string email, string idnum, string cardnum,vector<Client>& vec) {
+void create(string ID, string name, string phonenum, string email, string idnum, string cardnum, vector<Client>& vec) {
 	cout << "请设置您的身份标识号：";
 	cin >> ID;
 	cout << "请输入您的姓名：";
@@ -144,6 +144,7 @@ void create(string ID,string name,string phonenum,string email, string idnum, st
 	cin >> idnum;
 	//随机生成16位银行卡号
 	for (int i = 0; i < 16; i++) cardnum += to_string(dis(gen));
+	cout << cardnum;//告诉开户人银行卡号
 	vec.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
 };
 int main()
@@ -166,14 +167,14 @@ int main()
 			care:showLogin();
 				cin >> ID;
 				if (ID == "1") {
-					create(ID, name, phonenum, email, idnum, cardnum, user);					
+					create(ID, name, phonenum, email, idnum, cardnum, user);
 					cout << "已开户成功，点击退回登陆界面" << endl;
 					getchar();
 					continue;
 				}
 				else {
 					//查询是否存在输入账户，若不存在，则重新输入账号
-					int position = match(user.begin(),user.end(),ID);
+					int position = match(user.begin(), user.end(), ID);
 					if (position == -1) goto care;
 					LoginFlag = false;
 					int choice = 0;
@@ -196,8 +197,34 @@ int main()
 						user[position].cancellation();
 						break;
 					case 9:
-						user[position].transfer();
+					{
+						int i;
+						string cardnum1;
+						cout << "请输入转入账户" << endl;
+						cin >> cardnum1;
+						i = matchcardnum(user.begin(), user.end(), cardnum1);
+						double fund, balance_1, balance_2;
+						balance_1 = user[position].getbalance();
+						cout << "请输入转账金额" << endl;
+						cin >> fund;
+						if (fund <= 5000) {
+							balance_1 = balance_1 - fund;
+						}
+						if (fund > 5000 && fund <= 10000) {
+							balance_1 = balance_1 - fund - 5;
+						}
+						if (fund > 10000 && fund <= 50000) {
+							balance_1 = balance_1 - fund - 7.5;
+						}
+						if (fund > 50000) {
+							balance_1 = balance_1 - fund - fund * 0.00015;
+						}
+						user[position].transfer(balance_1);
+						balance_2 = user[i].getbalance();
+						balance_2 = balance_2 + fund;
+						user[i].transfer(balance_2);
 						break;
+					}
 					default:
 						cout << "非法输入，请再次输入" << endl;
 					}
@@ -208,7 +235,7 @@ int main()
 
 			}
 		}
-		if (system_i != '0' && system_i != '1' && system_i!='q') cout << "非法输入，请再次输入" << endl;
+		if (system_i != '0' && system_i != '1' && system_i != 'q') cout << "非法输入，请再次输入" << endl;
 	} while (system_i != 'q');
 	return 0;
 }
@@ -218,32 +245,32 @@ int main()
 
 void Client::getMoney()
 {
-	cout<<"请输入取款金额:"<<endl;
-	int m;
+	cout << "请输入取款金额:" << endl;
+	double m;
 	// wuhanhan:原本为cin<<m,我修改了一下，cin>>m 如果知晓就可以删除
-	cin>>m;
+	cin >> m;
 	//wuhanhan:是不是改成 >=
-	if(balance>m)
+	if (balance > m)
 	{
-		balance=balance-m;
-		cout<<"取款成功！"<<endl;
-		cout<<"当前账户余额为："<<balance<<endl;
+		balance = balance - m;
+		cout << "取款成功！" << endl;
+		cout << "当前账户余额为：" << balance << endl;
 	}
-	else cout<<"您的余额不足"<<endl;
+	else cout << "您的余额不足" << endl;
 }
 
-void Client::saveMoney(){
-	int deposit;
-	cout<<"请输入存款金额:"<<endl;
-	cin>>deposit;
+void Client::saveMoney() {
+	double deposit;
+	cout << "请输入存款金额:" << endl;
+	cin >> deposit;
 	balance = balance + deposit;
-	cout<<"当前账户余额为："<<balance<<endl;
+	cout << "当前账户余额为：" << balance << endl;
 }
 
 //wuhanhan: 要删除这个对应的vector元素，可能需要传指针或者什么其他的
-void Client::cancellation(){
-	if(balance == 0){
-		cout<<"账户已成功注销"<<endl;
+void Client::cancellation() {
+	if (balance == 0) {
+		cout << "账户已成功注销" << endl;
 		ID = "0";
 		name = "none";
 		phonenum = "0";
@@ -253,26 +280,10 @@ void Client::cancellation(){
 		//wuhanhan:这行会报错，我先注释掉.此外，if后的{}没有匹配
 		//bal = 0;cg:未命名标识符，添加了}以通过运行
 	}
-	else cout<<"无法办理销户"<<endl;
+	else cout << "无法办理销户" << endl;
 }
-void Client::transfer(){
-        int fund;
-        int i;
-        string cardnum1;
-        cout<<"请输入转入账户"<<endl;
-        cin>>cardnum1;
-        i = matchcardnum(user.begin(),user.end(),cardnum1);
-        cout<<"请输入转账金额"<<endl;
-        cin>>fund;
-        if(fund<=5000){
-        balance=balance-fund;}
-        if(fund>5000&fund<=10000){
-        balance=balance-fund-5;}
-        if(fund>10000&fund<=50000){
-        balance=balance-fund-7.5;}
-        if(fund>50000){
-        balance=balance-fund-fund*0.00015;}
-        user[i].balance=user[i].balance+fund;
+void Client::transfer(double fund) {
+	balance =  fund;
 }
 std::string Client::getname()
 {
@@ -294,11 +305,11 @@ std::string Client::getcardnum()
 {
 	return cardnum;
 }
-int Client::getbalance()
+double Client::getbalance()
 {
 	return balance;
 }
-void saveToFile(const std::string& filename,vector<Client> data)
+void saveToFile(const std::string& filename, vector<Client> data)
 {
 	std::ofstream outfile(filename, std::ios::out | std::ios::app);
 	if (outfile.is_open()) {
