@@ -21,9 +21,8 @@ void Administrator::browse()
 }
 void Administrator::saveToFile(const std::string& filename)
 {
-	std::ofstream outfile(filename, std::ios::out | std::ios::app);
+	std::ofstream outfile(filename, std::ios::out | std::ios::trunc);
 	if (outfile.is_open()) {
-		outfile.seekp(0, std::ios::beg);
 		for (auto& client : data) {
 			outfile << client.getID() << "," << client.getname() << "," << client.getphonenum() << "," << client.getemail() << "," << client.getidnum() << "," << client.getcardnum() << "," << client.getbalance() << std::endl;
 		}
