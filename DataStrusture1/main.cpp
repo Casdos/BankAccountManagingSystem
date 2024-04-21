@@ -28,7 +28,7 @@ public:
 	void modify();
 	void saveMoney();
 	void getMoney();
-	void cancellation();
+	void cancellation(vector<Client>&);
 	void transfer(double fund);
 	string getID() { return ID; };
 	std::string getname();//增添了下列若干个函数用于获得各项信息以存储，要不要干脆类改成public得了
@@ -224,7 +224,7 @@ int main()
 						user[position].getMoney();
 						break;
 					case 6:
-						user[position].cancellation();
+						user[position].cancellation(user);
 						break;
 					case 9:
 					{
@@ -277,10 +277,8 @@ void Client::getMoney()
 {
 	cout << "请输入取款金额:" << endl;
 	double m;
-	// wuhanhan:原本为cin<<m,我修改了一下，cin>>m 如果知晓就可以删除
 	cin >> m;
-	//wuhanhan:是不是改成 >=
-	if (balance > m)
+	if (balance >= m)
 	{
 		balance = balance - m;
 		cout << "取款成功！" << endl;
@@ -298,8 +296,10 @@ void Client::saveMoney() {
 }
 
 //wuhanhan: 要删除这个对应的vector元素，可能需要传指针或者什么其他的
-void Client::cancellation() {
-	if (balance == 0) {
+void Client::cancellation(vector<Client>& user) {
+	auto it = find(user.begin(), user.end(), *this);
+	if (it != user.end() && (*it).getbalance() == 0) {
+		user.erase(it);
 		cout << "账户已成功注销" << endl;
 		ID = "0";
 		name = "none";
@@ -307,13 +307,14 @@ void Client::cancellation() {
 		email = "@bit.edu";
 		idnum = "0";
 		cardnum = "unknown";
-		//wuhanhan:这行会报错，我先注释掉.此外，if后的{}没有匹配
-		//bal = 0;cg:未命名标识符，添加了}以通过运行
+		balance = 0;
 	}
-	else cout << "无法办理销户" << endl;
+	else {
+		cout << "无法办理销户" << endl;
+	}
 }
 void Client::transfer(double fund) {
-	balance =  fund;
+	balance =  fund;//zengyunqiao：应该是balance +=  fund？
 }
 std::string Client::getname()
 {

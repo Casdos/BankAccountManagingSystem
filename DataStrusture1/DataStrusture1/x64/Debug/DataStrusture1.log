@@ -1,3 +1,38 @@
 ﻿  main.cpp
-D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(122,1): warning C4715: “match”: 不是所有的控件路径都返回值
-  DataStrusture1.vcxproj -> D:\Github\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe
+D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(55,29): warning C4244: “+=”: 从“double”转换到“int”，可能丢失数据
+D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(185,11): error C2664: “void Host::browse(std::vector<Client,std::allocator<Client>>)”: 无法将参数 1 从“overloaded-function”转换为“std::vector<Client,std::allocator<Client>>”
+  D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(185,18):
+  “std::vector<Client,std::allocator<Client>>::vector”: 没有重载函数可以转换所有参数类型
+  	D:\VS 2022\IDE\VC\Tools\MSVC\14.39.33519\include\vector(654,5):
+  	可能是“std::vector<Client,std::allocator<Client>>::vector(std::initializer_list<_Ty>,const _Alloc &)”
+          with
+          [
+              _Ty=Client,
+              _Alloc=std::allocator<Client>
+          ]
+  		D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(185,18):
+  		“std::vector<Client,std::allocator<Client>>::vector(std::initializer_list<_Ty>,const _Alloc &)”: 无法将参数 1 从“overloaded-function”转换为“std::initializer_list<_Ty>”
+          with
+          [
+              _Ty=Client,
+              _Alloc=std::allocator<Client>
+          ]
+          and
+          [
+              _Ty=Client
+          ]
+  			D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(185,18):
+  			转换要求第二个用户定义的转换运算符或构造函数
+  	D:\VS 2022\IDE\VC\Tools\MSVC\14.39.33519\include\vector(627,5):
+  	或    “std::vector<Client,std::allocator<Client>>::vector(_Iter,_Iter,const _Alloc &)”
+          with
+          [
+              _Alloc=std::allocator<Client>
+          ]
+  	D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(185,18):
+  	尝试匹配参数列表“(overloaded-function)”时
+  D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(49,12):
+  参见“Host::browse”的声明
+  D:\Github\BankAccountManagingSystem\DataStrusture1\main.cpp(185,11):
+  尝试匹配参数列表“(overloaded-function)”时
+  
