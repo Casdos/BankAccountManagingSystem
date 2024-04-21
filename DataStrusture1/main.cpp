@@ -103,7 +103,11 @@ int main()
 					case 5:
 						position->getMoney();
 					case 6:
+<<<<<<< Updated upstream
 						user.cancellation();
+=======
+						user.cancellation(ID);
+>>>>>>> Stashed changes
 					default:
 						cout << "非法输入，请再次输入" << endl;
 =======

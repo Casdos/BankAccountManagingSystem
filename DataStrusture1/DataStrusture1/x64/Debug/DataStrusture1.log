@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ﻿main.obj : error LNK2019: 无法解析的外部符号 "public: void __cdecl Window::showClientFuncTable(void)" (?showClientFuncTable@Window@@QEAAXXZ)，函数 main 中引用了该符号
 D:\Github\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe : fatal error LNK1120: 1 个无法解析的外部命令
 =======
@@ -9,4 +10,8 @@ C:\Users\0\Desktop\DataStrusture1\Client.cpp(121,28): warning C4244: “=”: �
 C:\Users\0\Desktop\DataStrusture1\Client.cpp(125,28): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
 C:\Users\0\Desktop\DataStrusture1\Client.cpp(127,21): warning C4244: “+=”: 从“double”转换到“int”，可能丢失数据
   DataStrusture1.vcxproj -> C:\Users\0\Desktop\DataStrusture1\x64\Debug\DataStrusture1.exe
+>>>>>>> Stashed changes
+=======
+﻿  main.cpp
+  DataStrusture1.vcxproj -> C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe
 >>>>>>> Stashed changes
