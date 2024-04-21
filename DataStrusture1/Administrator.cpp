@@ -11,13 +11,12 @@ void Administrator::browse()
 {
 	int sumt = 0;
 	cout << "全体账户列表:" << endl;
-	cout << "ID\t" << "姓名\t" << "存款" << endl;
+	cout << "ID" << "\t" << "姓名" << "\t" << "余额" << endl;
 	for (int i = 0; i < data.size(); i++)
 	{
-		cout <<data[i].getID()<<"\t" << data[i].getname() << "\t" << data[i].getbalance() << endl;
+		cout << data[i].getID() << "\t" << data[i].getname() << "\t" << data[i].getbalance() << endl;
 		sumt += data[i].getbalance();
 	}
-	
 	cout << "当前账户的数量：" << data.size() << endl;
 	cout << "当前的总存款数：" << sumt << endl;
 }
@@ -92,7 +91,7 @@ void Administrator::create(string ID, string name, string phonenum, string email
 	mt19937 gen(rd());
 	uniform_int_distribution<int> dis(0, 9);
 	for (int i = 0; i < 16; i++) cardnum += to_string(dis(gen));
-	cout << "已成功开户，您的银行卡号是：" << cardnum << endl;
+	cout << "已开户成功，您的银行卡号是：" << cardnum << endl;
 	data.push_back(Client(ID, name, phonenum, email, idnum, cardnum));
 }
 Client* Administrator::match_ID(const string s)
@@ -106,10 +105,9 @@ Client* Administrator::match_ID(const string s)
 				return &client;
 			}
 		}
-		
+		cout << "没有找到对应账号,请核验账号" << endl;
+		return nullptr;
 	}
-	cout << "没有找到对应账号,请核验账号" << endl;
-	return nullptr;
 }
 bool Administrator::cancellation(const string s)
 {
