@@ -36,3 +36,25 @@ Client* User::match(const string s)
 		return nullptr;
 	}
 }
+//wuhanhan: 要删除这个对应的vector元素，可能需要传指针或者什么其他的
+bool User::cancellation(const string s) 
+{
+	for (auto it = data.begin(); it != data.end(); ) {
+		if (it->getID() == s) {
+			// 删除当前元素
+			if (it->getbalance() == 0)
+			{
+				it = data.erase(it);
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else {
+			it++;
+		}
+	}
+	return 0;
+}

@@ -98,19 +98,3 @@ void Client::saveMoney() {
 	balance = balance + deposit;
 	cout << "当前账户余额为：" << balance << endl;
 }
-
-//wuhanhan: 要删除这个对应的vector元素，可能需要传指针或者什么其他的
-void Client::cancellation() {
-	if (balance == 0) {
-		cout << "账户已成功注销" << endl;
-		ID = "0";
-		name = "none";
-		phonenum = "0";
-		email = "@bit.edu";
-		idnum = "0";
-		cardnum = "unknown";
-		//wuhanhan:这行会报错，我先注释掉.此外，if后的{}没有匹配
-		//bal = 0;cg:本行为了运行成功注释掉，{}补充匹配了
-	}
-	else cout << "无法办理销户" << endl;
-	}

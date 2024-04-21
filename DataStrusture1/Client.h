@@ -23,7 +23,7 @@ public:
 	void modify();//cg:修改函数的界面
 	void saveMoney();
 	void getMoney();
-	void cancellation();//cg:注销
+	
 	string getID();
 	string getname();
 	string getphonenum();
