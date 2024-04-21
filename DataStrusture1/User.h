@@ -7,7 +7,7 @@
 class User
 {
 private:
-	std::vector<Client> data;
+	vector<Client> data;
 public:
 	void create(string ID, string name, string phonenum, string email, string idnum, string cardnum);
 	//¥¥Ω®’Àªß

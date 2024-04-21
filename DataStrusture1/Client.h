@@ -8,12 +8,12 @@ using namespace std;
 class Client
 {
 private:
-	std::string ID;
-	std::string name;
-	std::string phonenum;
-	std::string email;
-	std::string idnum; // 身份证号
-	std::string cardnum; // 银行卡号
+	string ID;
+	string name;
+	string phonenum;
+	string email;
+	string idnum; // 身份证号
+	string cardnum; // 银行卡号
 	int balance;//cg:账户余额
 public:
 	Client(std::string IDn = "0", std::string n = "none", std::string phone = "0", std::string e = "@bit.edu", \
@@ -24,12 +24,12 @@ public:
 	void saveMoney();
 	void getMoney();
 	void cancellation();//cg:注销
-	std::string getID();
-	std::string getname();
-	std::string getphonenum();
-	std::string getemail();
-	std::string getidnum();
-	std::string getcardnum();
+	string getID();
+	string getname();
+	string getphonenum();
+	string getemail();
+	string getidnum();
+	string getcardnum();
 	int getbalance();
 	void setPhone();
 	void setEmail();

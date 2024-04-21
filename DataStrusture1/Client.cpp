@@ -1,26 +1,26 @@
 #include "Client.h"
 using namespace std;
-std::string Client::getID() 
+string Client::getID() 
 { 
 	return ID; 
 }
-std::string Client::getname()
+string Client::getname()
 {
 	return name;
 }
-std::string Client::getphonenum()
+string Client::getphonenum()
 {
 	return phonenum;
 }
-std::string Client::getemail()
+string Client::getemail()
 {
 	return email;
 }
-std::string Client::getidnum()
+string Client::getidnum()
 {
 	return idnum;
 }
-std::string Client::getcardnum()
+string Client::getcardnum()
 {
 	return cardnum;
 }
@@ -30,23 +30,23 @@ int Client::getbalance()
 }
 void Client::setPhone() 
 {
-	std::string s; 
-	std::cout << "请输入修改后电话："; 
-	std::cin >> s; 
+	string s; 
+	cout << "请输入修改后电话："; 
+	cin >> s; 
 	phonenum = s; 
 }
 void Client::setEmail()
 {
-	std::string s; std::cout << "请输入修改后邮件："; std::cin >> s; email = s;
+	string s; cout << "请输入修改后邮件："; cin >> s; email = s;
 }
 void Client::check() {
-	std::cout << "您的身份标识号:\t" << ID << std::endl;
-	std::cout << "您的姓名:\t" << name << std::endl;
-	std::cout << "您的电话:\t" << phonenum << std::endl;
-	std::cout << "您的邮箱:\t" << email << std::endl;
-	std::cout << "您的身份证号:\t" << idnum << std::endl;
-	std::cout << "您的银行卡号:\t" << cardnum << std::endl;
-	std::cout << "您的余额:\t" << balance << std::endl;
+	cout << "您的身份标识号:\t" << ID << endl;
+	cout << "您的姓名:\t" << name << endl;
+	cout << "您的电话:\t" << phonenum << endl;
+	cout << "您的邮箱:\t" << email << endl;
+	cout << "您的身份证号:\t" << idnum << endl;
+	cout << "您的银行卡号:\t" << cardnum << endl;
+	cout << "您的余额:\t" << balance << endl;
 }
 void Client::modify() {
 	char choice = NULL;
