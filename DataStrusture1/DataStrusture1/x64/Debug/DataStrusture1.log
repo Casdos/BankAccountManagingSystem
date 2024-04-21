@@ -1,7 +1,6 @@
-﻿  Client.cpp
+﻿  Host.cpp
   User.cpp
-  Window.cpp
   main.cpp
   正在生成代码...
-D:\Github\BankAccountManagingSystem\DataStrusture1\User.cpp(35,1): warning C4715: “User::match”: 不是所有的控件路径都返回值
-  DataStrusture1.vcxproj -> D:\Github\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe
+C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\User.cpp(35,1): warning C4715: “User::match”: 不是所有的控件路径都返回值
+  DataStrusture1.vcxproj -> C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe

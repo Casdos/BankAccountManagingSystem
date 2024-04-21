@@ -8,15 +8,17 @@ int main()
 	int balance = 0;
 	char system_i = NULL;
 	Window window;
-	User user;
 
 	do {
 		window.showHomeMean();
 		cin >> system_i;
-		if (system_i == '0') {
-
+		if (system_i == '0') 
+		{
+			Host host;
 		}
-		else if (system_i == '1') {
+		else if (system_i == '1') 
+		{
+			User user;
 			bool LoginFlag = true;
 			while (LoginFlag) {
 			care:window.showLogin();
