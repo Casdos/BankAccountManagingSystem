@@ -24,7 +24,7 @@ string Client::getcardnum()
 {
 	return cardnum;
 }
-int Client::getbalance()
+double Client::getbalance()
 {
 	return balance;
 }
@@ -46,7 +46,7 @@ void Client::check() {
 	cout << "您的邮箱:\t" << email << endl;
 	cout << "您的身份证号:\t" << idnum << endl;
 	cout << "您的银行卡号:\t" << cardnum << endl;
-	cout << "您的余额:\t" << balance << endl;
+	cout << "您的余额:\t" << fixed<<setprecision(2)<<balance << endl;
 }
 void Client::modify() {
 	char choice = NULL;
@@ -78,25 +78,23 @@ void Client::modify() {
 void Client::getMoney()
 {
 	cout << "请输入取款金额:" << endl;
-	int m;
-	// wuhanhan:原本为cin<<m,我修改了一下，cin>>m 如果知晓就可以删除
+	double m;
 	cin >> m;
-	//wuhanhan:是不是改成 >=
-	if (balance > m)
+	if (balance >= m)
 	{
 		balance = balance - m;
 		cout << "取款成功！" << endl;
-		cout << "当前账户余额为：" << balance << endl;
+		cout << "当前账户余额为：" << fixed << setprecision(2) << balance << endl;
 	}
 	else cout << "您的余额不足" << endl;
 }
 
 void Client::saveMoney() {
-	int deposit;
+	double deposit;
 	cout << "请输入存款金额:" << endl;
 	cin >> deposit;
 	balance = balance + deposit;
-	cout << "当前账户余额为：" << balance << endl;
+	cout << "当前账户余额为：" << fixed << setprecision(2) << balance << endl;
 }
 void Client::transfer_accounts(Client* target)
 {

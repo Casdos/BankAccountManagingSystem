@@ -1,7 +1,5 @@
 ﻿  Administrator.cpp
-  main.cpp
+  Client.cpp
   正在生成代码...
-C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\Administrator.cpp(111,1): warning C4715: “Administrator::match_ID”: 不是所有的控件路径都返回值
-C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\Administrator.cpp(147,1): warning C4715: “Administrator::match_cardnum”: 不是所有的控件路径都返回值
-  LINK : 没有找到 C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe 或上一个增量链接没有生成它；正在执行完全链接
-  DataStrusture1.vcxproj -> C:\Users\0\Desktop\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe
+D:\Github\BankAccountManagingSystem\DataStrusture1\Administrator.cpp(147,1): warning C4715: “Administrator::match_cardnum”: 不是所有的控件路径都返回值
+  DataStrusture1.vcxproj -> D:\Github\BankAccountManagingSystem\DataStrusture1\x64\Debug\DataStrusture1.exe

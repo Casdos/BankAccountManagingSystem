@@ -4,7 +4,7 @@
 int main()
 {
 	string ID, name, phonenum, email, idnum, cardnum;
-	int balance = 0;
+	double balance = 0;
 	string system_i;
 	Window window;//创建窗口对象，调用窗口函数
 	Administrator admin;
@@ -30,6 +30,24 @@ int main()
 					string name;
 					cin >> name;
 					admin.find(name);
+					continue;
+				}
+				else if (choice == "10")
+				{
+					cout << "请输出导入地址" << endl;
+					string address;
+					cin >> address;
+					admin.loadFromFile(address);
+					cout << "导入成功" << endl;
+					continue;
+				}
+				else if (choice == "11")
+				{
+					cout << "请输出导出地址" << endl;
+					string address;
+					cin >> address;
+					admin.saveToFile(address);
+					cout << "导出成功" << endl;
 					continue;
 				}
 				else if (choice == "q")

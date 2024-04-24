@@ -9,16 +9,16 @@ Administrator::~Administrator()
 }
 void Administrator::browse()
 {
-	int sumt = 0;
+	double sumt = 0;
 	cout << "全体账户列表:" << endl;
-	cout << "ID" << "\t" << "姓名" << "\t" << "余额" << endl;
+	cout << "ID" << "\t" << "姓名" << "\t" << "余额" << "\t" << "银行卡号" << endl;
 	for (int i = 0; i < data.size(); i++)
 	{
-		cout << data[i].getID() << "\t" << data[i].getname() << "\t" << data[i].getbalance() << endl;
+		cout << data[i].getID() << "\t" << data[i].getname() << "\t" << fixed << setprecision(2) << data[i].getbalance() << "\t" << data[i].getcardnum() << endl;
 		sumt += data[i].getbalance();
 	}
 	cout << "当前账户的数量：" << data.size() << endl;
-	cout << "当前的总存款数：" << sumt << endl;
+	cout << "当前的总存款数：" << fixed << setprecision(2) << sumt << endl;
 }
 void Administrator::saveToFile(const std::string& filename)
 {
@@ -63,7 +63,7 @@ bool Administrator::loadFromFile(const std::string& filename) {
 			std::string cardnum = line.substr(0, pos);
 			line.erase(0, pos + 1);
 
-			int balance = std::stoi(line);
+			double balance = std::stoi(line);
 			data.emplace_back(ID, name, phonenum, email, idnum, cardnum);
 		}
 		infile.close();
@@ -105,9 +105,9 @@ Client* Administrator::match_ID(const string s)
 				return &client;
 			}
 		}
-		cout << "没有找到对应账号,请核验账号" << endl;
-		return nullptr;
 	}
+	cout << "没有找到对应账号,请核验账号" << endl;
+	return nullptr;
 }
 bool Administrator::cancellation(const string s)
 {
@@ -158,7 +158,7 @@ void Administrator::find(string s)
 				cout << "您的邮箱:\t" << client.getemail() << endl;
 				cout << "您的身份证号:\t" << client.getidnum() << endl;
 				cout << "您的银行卡号:\t" << client.getcardnum() << endl;
-				cout << "您的余额:\t" << client.getbalance() << endl;
+				cout << "您的余额:\t" << fixed << setprecision(2) << client.getbalance() << endl;
 				found = true;
 				break;
 			}
