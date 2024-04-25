@@ -74,9 +74,19 @@ bool Administrator::loadFromFile(const std::string& filename) {
 		return 0;
 	}
 }
-void Administrator::create(string ID, string name, string phonenum, string email, string idnum, string cardnum) {
+void Administrator::create() 
+{
+	string ID,name, phonenum, email, idnum, cardnum;
 	cout << "请设置您的身份标识号：";
-	cin >> ID;
+	while (1)
+	{
+		cin >> ID;
+		if (match_ID == nullptr)
+			break;
+		else
+		cout << "用户名重复，请设置新的用户名。" << endl;
+	}
+	
 	cout << "请输入您的姓名：";
 	cin >> name;
 	cout << "请输入您的电话：";

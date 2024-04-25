@@ -63,12 +63,12 @@ int main()
 			{
 				window.showLogin();
 				cin >> ID;
-				if (ID == "1") {
-					admin.create(ID, name, phonenum, email, idnum, cardnum);
-					cout << "已开户成功，点击退回登陆界面" << endl;
-					getchar();
-					continue;
-				}
+					if (ID == "1") {
+						admin.create();
+						cout << "已开户成功，点击退回登陆界面" << endl;
+						getchar();
+						continue;
+					}
 				else if (ID == "q")
 					break;
 				else
